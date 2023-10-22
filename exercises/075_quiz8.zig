@@ -49,7 +49,11 @@ const Path = struct {
 //
 // Please fill in the body of this function!
 fn makePath(from: *Place, to: *Place, dist: u8) Path {
-
+    return Path{
+        .from = from,
+        .to = to,
+        .dist = dist,
+    };
 }
 
 // Using our new function, these path definitions take up considerably less
@@ -167,7 +171,13 @@ pub fn main() void {
     //
     const letters = [_][]const u8{ "a", "b", "c", "d", "e", "f" };
     inline for (letters) |letter| {
+        // So in here @This() returns a reference(?) to current file
+        // as if it was a struct... It returns this: @as(type, 075_quiz8)
+        //@compileLog(@This());
+
         @field(@This(), letter).paths = @field(@This(), letter ++ "_paths")[0..];
+        // Translates to:
+        //   a.paths = a_paths[0..];
     }
 
     var notebook = HermitsNotebook{};

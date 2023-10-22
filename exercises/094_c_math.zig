@@ -19,7 +19,7 @@ const std = @import("std");
 
 const c = @cImport({
     // What do wee need here?
-    ???
+    @cInclude("math.h");
 });
 
 pub fn main() !void {
@@ -30,5 +30,6 @@ pub fn main() !void {
     const result = c.fmod(angle, circle);
 
     // We use formatters for the desired precision and to truncate the decimal places
-    std.debug.print("The normalized angle of {d: >3.1} degrees is {d: >3.1} degrees.\n", .{ angle, result });
+    std.debug.print("The normalized angle of {d: >3.1} degrees is {d: >3.1} degrees.\n",
+    .{ angle, result });
 }
